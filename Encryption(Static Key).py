@@ -4,62 +4,86 @@ Key2 =       ['Q', 'j', 'u', 'D', '9', 'M', 'W', 'Z', 'q', 'b', '7', 'o', '3', '
 Key3 =       ['S', 'C', 'Q', 'x', 'H', 'G', 'e', 'a', 'y', '4', '9', 'p', 'l', '2', 'X', 'R', 'v', 'K', 'f', '3', 'F', 'c', 'U', 'q', 'o', 'V', 'T', '8', 'L', 'n', 'd', 'D', 'W', 'J', 'I', '1', 'N', 'Y', 'M', 'r', ',', ' ', 'O', 'm', '5', '?', 't', 'P', 'z', '7', 'B', 'k', 'i', 'E', 'g', '!', 'j', 'A', '0', 'w', 's', '.', 'Z', '6', 'u', 'h', 'b']
 
 while True:
-	print("------------")
-	print("1.Encrypt\n2.Decrypt")
-	choice = input("")
-	print("")
-	print("Enter your message:")
-	ec = list(input(""))
-	
-	A = 0
-	B = 0
-	C = 0
-	
-	String_Length = len(ec)
-	Section_Length = String_Length / 3
-	Start = 0
-	Stop = int(Section_Length)
-	Section_Length = int(Section_Length)
-	Start = int(Start)
-	Stop = int(Stop)
-	S1 = ec[Start : Stop]
-	Start = Start + Section_Length
-	Stop = Stop + Stop
-	S2 = ec[Start : Stop]
-	Start = Start + Section_Length
-	Stop = Stop + Stop
-	S3 = ec[Start : len(ec)]
-	Start = Start + Section_Length
-	Stop = Stop + Stop
-	
-	if choice == "1":
-		
-		while A < len(S1):	
-			charpos = Characters.index(str(S1[A]))
-			S1[A] = Key[charpos]
-			A += 1
-		while B < len(S2):
-			charpos2 = Characters.index(str(S2[B]))
-			S2[B] = Key2[charpos2]
-			B += 1				
-		while C < len(S3):
-			charpos3 = Characters.index(str(S3[C]))
-			S3[C] = Key3[charpos3]
-			C += 1
+    print("------------")
+    print("1.Encrypt\n2.Decrypt")
+    choice = input("")
+    print("")
+    print("Enter your message:")
+    ec = list(input(""))
+    
+    A = 0
+    B = 0
+    C = 0
+    
+    String_Length = len(ec)
+    Section_Length = String_Length / 3
+    Start = 0
+    Stop = int(Section_Length)
+    Section_Length = int(Section_Length)
+    Start = int(Start)
+    Stop = int(Stop)
+    S1 = ec[Start : Stop]
+    Start = Start + Section_Length
+    Stop = Stop + Stop
+    S2 = ec[Start : Stop]
+    Start = Start + Section_Length
+    Stop = Stop + Stop
+    S3 = ec[Start : len(ec)]
+    Start = Start + Section_Length
+    Stop = Stop + Stop
+    
+    if choice == "1":
+        
+        while A < len(S1):
+            try:
+                charpos = Characters.index(str(S1[A]))
+                S1[A] = Key[charpos]
+                A += 1
+            except ValueError:
+                S1[A] = S1[A]
+                A += 1
+        while B < len(S2):
+            try:
+                charpos2 = Characters.index(str(S2[B]))
+                S2[B] = Key2[charpos2]
+                B += 1     
+            except ValueError:
+                S2[B] = S2[B]
+                B += 1
+        while C < len(S3):
+            try:
+                charpos3 = Characters.index(str(S3[C]))
+                S3[C] = Key3[charpos3]
+                C += 1
+            except ValueError:
+                S3[C] = S3[C]
+                C += 1
 
-	if choice == "2":
-			
-		while A < len(S1):	
-			charpos = Key.index(str(S1[A]))
-			S1[A] = Characters[charpos]
-			A += 1		
-		while B < len(S2):
-			charpos2 = Key2.index(str(S2[B]))
-			S2[B] = Characters[charpos2]
-			B += 1				
-		while C < len(S3):
-			charpos3 = Key3.index(str(S3[C]))
-			S3[C] = Characters[charpos3]
-			C += 1
-								
-	print(*S1, *S2, *S3, sep='')
+    if choice == "2":
+            
+        while A < len(S1):
+            try:
+                charpos = Key.index(str(S1[A]))
+                S1[A] = Characters[charpos]
+                A += 1
+            except ValueError:
+                S1[A] = S1[A]
+                A += 1
+        while B < len(S2):
+            try:
+                charpos2 = Key2.index(str(S2[B]))
+                S2[B] = Characters[charpos2]
+                B += 1
+            except ValueError:
+                S2[B] = S2[B]
+                B += 1
+        while C < len(S3):
+            try:
+                charpos3 = Key3.index(str(S3[C]))
+                S3[C] = Characters[charpos3]
+                C += 1
+            except ValueError:
+                S3[C] = S3[C]
+                C += 1
+                                
+    print(*S1, *S2, *S3, sep='')
