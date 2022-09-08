@@ -65,19 +65,20 @@ def Decrypt():
         charpos3 = Key3.index(str(S3[C]))
         S3[C] = Characters[charpos3]
         C += 1
-
-for i in range(len(Characters1)):
-    Char = random.choice(Characters1)
-    Characters1.remove(Char)
-    Key.append(Char)
-for i in range(len(Characters2)):
-    Char = random.choice(Characters2)
-    Characters2.remove(Char)
-    Key2.append(Char)
-for i in range(len(Characters3)):
-    Char = random.choice(Characters3)
-    Characters3.remove(Char)
-    Key3.append(Char)
+        
+def GenKey():
+    for i in range(len(Characters1)):
+        Char = random.choice(Characters1)
+        Characters1.remove(Char)
+        Key.append(Char)
+    for i in range(len(Characters2)):
+        Char = random.choice(Characters2)
+        Characters2.remove(Char)
+        Key2.append(Char)
+    for i in range(len(Characters3)):
+        Char = random.choice(Characters3)
+        Characters3.remove(Char)
+        Key3.append(Char)
 
 while True:
     Startup = input("Would you like to use an existing key(1) or create a new one(2)?: ")
@@ -98,6 +99,7 @@ while True:
     if Startup == "2":
         print("")
         Name = input("What would you like to name the key file? (without extension): ")
+        GenKey()
         if Name == "":
             Name = "Key"
         f = open(Name + ".txt", "w+")
@@ -137,7 +139,7 @@ while True:
             ec = list(input("Enter your message: "))
             Sort()
             if choice == "1":
-               Encrypt()
+                Encrypt()
             if choice == "2":
                 Decrypt()
             print(*S1, *S2, *S3, sep='')
