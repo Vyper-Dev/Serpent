@@ -157,6 +157,7 @@ while True:
                 print("No text file found with that name. Generating one now.")
                 f = open(Name + ".txt", "w+")
                 f.close()
+                
         while True:
             print("------------------------------")
             print("Please Select an Option Below:")
@@ -164,7 +165,6 @@ while True:
             choice = input("")
             
             if choice == "1":
-                
                 print("")
                 ec = list(input("Enter your message: "))
                 Sort()
@@ -184,7 +184,6 @@ while True:
                 f.close()
                 
             if choice == "2":
-                
                 f = open(Name + ".txt", "r")
                 ec =  list(f.readline())
                 Sort()

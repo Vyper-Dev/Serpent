@@ -33,7 +33,6 @@ while True:
     Stop = Stop + Stop
     
     if choice == "1":
-        
         while A < len(S1):
             try:
                 charpos = Characters.index(str(S1[A]))
@@ -60,7 +59,6 @@ while True:
                 C += 1
 
     if choice == "2":
-            
         while A < len(S1):
             try:
                 charpos = Key.index(str(S1[A]))

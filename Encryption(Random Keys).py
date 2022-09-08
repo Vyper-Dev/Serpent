@@ -9,18 +9,19 @@ Key =        []
 Key2 =       []
 Key3 =       []
 
-for i in range(len(Characters1)):
-	Char = random.choice(Characters1)
-	Characters1.remove(Char)
-	Key.append(Char)
-for i in range(len(Characters2)):
-	Char = random.choice(Characters2)
-	Characters2.remove(Char)
-	Key2.append(Char)
-for i in range(len(Characters3)):
-	Char = random.choice(Characters3)
-	Characters3.remove(Char)
-	Key3.append(Char)
+def GenKey():
+    for i in range(len(Characters1)):
+        Char = random.choice(Characters1)
+        Characters1.remove(Char)
+        Key.append(Char)
+    for i in range(len(Characters2)):
+        Char = random.choice(Characters2)
+        Characters2.remove(Char)
+        Key2.append(Char)
+    for i in range(len(Characters3)):
+        Char = random.choice(Characters3)
+        Characters3.remove(Char)
+        Key3.append(Char)
 	
 Startup = input("Would you like to use an existing key(1) or create a new one?(2): ")
 if Startup == "1":
@@ -30,17 +31,15 @@ if Startup == "1":
 		Key2 = f.readline()
 		Key3 = f.readline()
 		f.close()
-		
 	else:
+		GenKey()
 		f = open("Key.txt", "w+")
 		for element in Key:
 			f.write(element)
 		f.write("\n")
-		f = open("Key.txt", "a")
 		for element in Key2:
 			f.write(element)
 		f.write("\n")
-		f = open("Key.txt", "a")
 		for element in Key3:
 			f.write(element)
 		f.close()
@@ -57,11 +56,9 @@ if Startup == "2":
 	for element in Key:
 		f.write(element)
 	f.write("\n")
-	f = open(Name + ".txt", "a")
 	for element in Key2:
 		f.write(element)
 	f.write("\n")
-	f = open(Name + ".txt", "a")
 	for element in Key3:
 		f.write(element)
 	f.close()
@@ -101,7 +98,6 @@ while True:
 	Stop = Stop + Stop
 	
 	if choice == "1":
-	
 		while A < len(S1):
 			charpos = Characters.index(str(S1[A]))
 			S1[A] = Key[charpos]
@@ -116,7 +112,6 @@ while True:
 			C += 1
 			
 	if choice == "2":
-	
 		while A < len(S1):
 			charpos = Key.index(str(S1[A]))
 			S1[A] = Characters[charpos]
