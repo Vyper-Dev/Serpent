@@ -5,7 +5,7 @@ Characters =  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 Characters1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
-Key =        []
+Key1 =       []
 Key2 =       []
 Key3 =       []
 
@@ -13,7 +13,7 @@ def GenKey():
     for i in range(len(Characters1)):
         Char = random.choice(Characters1)
         Characters1.remove(Char)
-        Key.append(Char)
+        Key1.append(Char)
     for i in range(len(Characters2)):
         Char = random.choice(Characters2)
         Characters2.remove(Char)
@@ -22,51 +22,47 @@ def GenKey():
         Char = random.choice(Characters3)
         Characters3.remove(Char)
         Key3.append(Char)
-	
-Startup = input("Would you like to use an existing key(1) or create a new one?(2): ")
-if Startup == "1":
-	if os.path.exists("Key.txt"):
-		f = open("Key.txt", "r")
-		Key =  f.readline()
-		Key2 = f.readline()
-		Key3 = f.readline()
-		f.close()
-	else:
+
+while True:
+	Startup = input("Would you like to use an existing key(1) or create a new one?(2): ")
+	if Startup == "1":
+		Name = input("What is the name of your key file? (without extension): ")
+		if Name == "":
+			Name = "Key"
+		if os.path.exists(Name + ".txt"):
+			f = open(Name + ".txt", "r")
+			Key1 =  f.readline()
+			Key2 = f.readline()
+			Key3 = f.readline()
+			f.close()
+			break
+		else:
+			print("No key file found with that name. Please re-enter your key file name.")
+			
+	if Startup == "2":
+		print("")
+		Name = input("What would you like to name the key file? (without extension): ")
 		GenKey()
-		f = open("Key.txt", "w+")
-		for element in Key:
+		if Name == "":
+			Name = "Key"
+		f = open(Name + ".txt", "w+")
+		for element in Key1:
 			f.write(element)
 		f.write("\n")
+		f = open(Name + ".txt", "a")
 		for element in Key2:
 			f.write(element)
 		f.write("\n")
+		f = open(Name + ".txt", "a")
 		for element in Key3:
 			f.write(element)
 		f.close()
-		a = open("Key.txt", "r")
-		Key =  a.readline()
+		a = open(Name + ".txt", "r")
+		Key1 =  a.readline()
 		Key2 = a.readline()
 		Key3 = a.readline()
 		a.close()
-		
-if Startup == "2":
-	print("")
-	Name = input("What would you like to name the key file?: ")
-	f = open(Name + ".txt", "w+")
-	for element in Key:
-		f.write(element)
-	f.write("\n")
-	for element in Key2:
-		f.write(element)
-	f.write("\n")
-	for element in Key3:
-		f.write(element)
-	f.close()
-	a = open(Name + ".txt", "r")
-	Key =  a.readline()
-	Key2 = a.readline()
-	Key3 = a.readline()
-	a.close()
+		break
 	
 while True:
 	print("------------")
@@ -100,7 +96,7 @@ while True:
 	if choice == "1":
 		while A < len(S1):
 			charpos = Characters.index(str(S1[A]))
-			S1[A] = Key[charpos]
+			S1[A] = Key1[charpos]
 			A += 1
 		while B < len(S2):
 			charpos2 = Characters.index(str(S2[B]))
@@ -113,7 +109,7 @@ while True:
 			
 	if choice == "2":
 		while A < len(S1):
-			charpos = Key.index(str(S1[A]))
+			charpos = Key1.index(str(S1[A]))
 			S1[A] = Characters[charpos]
 			A += 1
 		while B < len(S2):

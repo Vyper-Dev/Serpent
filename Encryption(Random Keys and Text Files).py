@@ -5,7 +5,7 @@ Characters =  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 Characters1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
-Key =        []
+Key1 =        []
 Key2 =       []
 Key3 =       []
 ec =         []
@@ -38,7 +38,7 @@ def Encrypt():
     C = 0
     while A < len(S1):
         charpos = Characters.index(str(S1[A]))
-        S1[A] = Key[charpos]
+        S1[A] = Key1[charpos]
         A += 1
     while B < len(S2):
         charpos2 = Characters.index(str(S2[B]))
@@ -54,7 +54,7 @@ def Decrypt():
     B = 0
     C = 0
     while A < len(S1):
-        charpos = Key.index(str(S1[A]))
+        charpos = Key1.index(str(S1[A]))
         S1[A] = Characters[charpos]
         A += 1
     while B < len(S2):
@@ -70,7 +70,7 @@ def GenKey():
     for i in range(len(Characters1)):
         Char = random.choice(Characters1)
         Characters1.remove(Char)
-        Key.append(Char)
+        Key1.append(Char)
     for i in range(len(Characters2)):
         Char = random.choice(Characters2)
         Characters2.remove(Char)
@@ -88,7 +88,7 @@ while True:
             Name = "Key"
         if os.path.exists(Name + ".txt"):
             f = open(Name + ".txt", "r")
-            Key =  f.readline()
+            Key1 =  f.readline()
             Key2 = f.readline()
             Key3 = f.readline()
             f.close()
@@ -103,7 +103,7 @@ while True:
         if Name == "":
             Name = "Key"
         f = open(Name + ".txt", "w+")
-        for element in Key:
+        for element in Key1:
             f.write(element)
         f.write("\n")
         f = open(Name + ".txt", "a")
@@ -115,7 +115,7 @@ while True:
             f.write(element)
         f.close()
         a = open(Name + ".txt", "r")
-        Key =  a.readline()
+        Key1 =  a.readline()
         Key2 = a.readline()
         Key3 = a.readline()
         a.close()
