@@ -1,13 +1,13 @@
 import random
 import os.path
 
-Characters =  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
+Characters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
-Key1 =       []
-Key2 =       []
-Key3 =       []
+Key1 = []
+Key2 = []
+Key3 = []
 
 def GenKey():
     for i in range(len(Characters1)):
@@ -26,9 +26,7 @@ def GenKey():
 while True:
 	Startup = input("Would you like to use an existing key(1) or create a new one?(2): ")
 	if Startup == "1":
-		Name = input("What is the name of your key file? (without extension): ")
-		if Name == "":
-			Name = "Key"
+		Name = input("\nWhat is the name of your key file? (No extension): ")
 		if os.path.exists(Name + ".txt"):
 			f = open(Name + ".txt", "r")
 			Key1 =  f.readline()
@@ -38,10 +36,8 @@ while True:
 			break
 		else:
 			print("No key file found with that name. Please re-enter your key file name.")
-			
 	if Startup == "2":
-		print("")
-		Name = input("What would you like to name the key file? (without extension): ")
+		Name = input("\nWhat would you like to name the key file? (No extension): ")
 		GenKey()
 		if Name == "":
 			Name = "Key"
@@ -65,17 +61,11 @@ while True:
 		break
 	
 while True:
-	print("------------")
-	print("1.Encrypt\n2.Decrypt")
-	choice = input("")
-	print("")
-	print("Enter your message:")
-	ec = list(input(""))
-	
 	A = 0
 	B = 0
 	C = 0
-	
+	choice = input("\n------------\n1.Encrypt\n2.Decrypt\nChoice: ")
+	ec = list(input("\nEnter your message: "))
 	String_Length = len(ec)
 	Section_Length = String_Length / 3
 	Start = 0
@@ -92,7 +82,7 @@ while True:
 	S3 = ec[Start : len(ec)]
 	Start = Start + Section_Length
 	Stop = Stop + Stop
-	
+
 	if choice == "1":
 		while A < len(S1):
 			charpos = Characters.index(str(S1[A]))
@@ -106,7 +96,6 @@ while True:
 			charpos3 = Characters.index(str(S3[C]))
 			S3[C] = Key3[charpos3]
 			C += 1
-			
 	if choice == "2":
 		while A < len(S1):
 			charpos = Key1.index(str(S1[A]))
@@ -120,5 +109,5 @@ while True:
 			charpos3 = Key3.index(str(S3[C]))
 			S3[C] = Characters[charpos3]
 			C += 1
-			
-	print(*S1, *S2, *S3, sep='')
+
+	print(f"Output: ", *S1, *S2, *S3, sep='')

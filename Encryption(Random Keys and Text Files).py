@@ -1,14 +1,14 @@
 import random
 import os.path
 
-Characters =  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
+Characters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
 Characters3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?"]
-Key1 =        []
-Key2 =       []
-Key3 =       []
-ec =         []
+Key1 = []
+Key2 = []
+Key3 = []
+ec = []
 
 def Sort():
     global S1
@@ -83,7 +83,7 @@ def GenKey():
 while True:
     Startup = input("Would you like to use an existing key(1) or create a new one(2)?: ")
     if Startup == "1":
-        Name = input("What is the name of your key file? (without extension): ")
+        Name = input("What is the name of your key file? (No extension): ")
         if Name == "":
             Name = "Key"
         if os.path.exists(Name + ".txt"):
@@ -95,10 +95,9 @@ while True:
             break
         else:
             print("No key file found with that name. Please re-enter your key file name.")
-            
     if Startup == "2":
         print("")
-        Name = input("What would you like to name the key file? (without extension): ")
+        Name = input("What would you like to name the key file? (No extension): ")
         GenKey()
         if Name == "":
             Name = "Key"
@@ -122,31 +121,22 @@ while True:
         break
 
 while True:
-    print(" ")
-    print("-------------------------------")
-    print("Please Select an Option Below:")
-    print("1.Encrypt/Decrypt a string\n2.Encrypt/Decrypt a text file")
-    choice = input("")
-    
+    choice = input("\n-------------------------------\nPlease Select an Option Below:\n1.Encrypt/Decrypt a message\n2.Encrypt/Decrypt a text file\nOption: ")
     if choice == "1":
         while True:
-            print("------------")
-            print("1.Encrypt\n2.Decrypt\n3.Back")
-            choice = input("")
+            choice = input("-------------------------------\nPlease Select a Method Below:\n1.Encrypt\n2.Decrypt\n3.Back\nMethod: ")
             if choice == "3":
                 break
-            print("------------")
-            ec = list(input("Enter your message: "))
+            ec = list(input("-------------------------------\nEnter your message: "))
             Sort()
             if choice == "1":
                 Encrypt()
             if choice == "2":
                 Decrypt()
             print(*S1, *S2, *S3, sep='')
-            
     if choice == "2":
         while True:
-            Name = input("What is the name of your text file? (without extension): ")
+            Name = input("What is the name of your text file? (No extension): ")
             print("")
             if os.path.exists(Name + ".txt"):
                 f = open(Name + ".txt", "r")
@@ -159,19 +149,12 @@ while True:
                 f.close()
                 
         while True:
-            print("------------------------------")
-            print("Please Select an Option Below:")
-            print("1.Encrypt\n2.Decrypt\n3.Back")
-            choice = input("")
-            
+            choice = input("-------------------------------\nPlease Select a Method Below:\n1.Encrypt\n2.Decrypt\n3.Back\nMethod: ")
             if choice == "1":
-                print("")
-                ec = list(input("Enter your message: "))
+                ec = list(input("\nEnter your message: "))
                 Sort()
                 Encrypt()
-                print("Message Encrypted as: ", *S1, *S2, *S3, sep='')
-                print("")
-                
+                print("\nMessage Encrypted as: ", *S1, *S2, *S3, sep='' + "\n")
                 f = open(Name + ".txt", "w+")
                 for element in S1:
                     f.write(element)
@@ -182,14 +165,11 @@ while True:
                 for element in S3:
                     f.write(element)
                 f.close()
-                
             if choice == "2":
                 f = open(Name + ".txt", "r")
                 ec =  list(f.readline())
                 Sort()
                 Decrypt()
-                print("Message Decrypted: ", *S1, *S2, *S3, sep='')
-                print("")
-            
+                print("\nMessage Decrypted as: ", *S1, *S2, *S3, sep='' + "\n")
             if choice == "3":
                 break
