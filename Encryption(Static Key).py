@@ -3,16 +3,62 @@ Key1 =        ['e', 'v', '5', '?', 'F', 'H', 'w', 'N', 'I', 'T', 'K', 'C', 'L', 
 Key2 =       ['Q', 'j', 'u', 'D', '9', 'M', 'W', 'Z', 'q', 'b', '7', 'o', '3', 'z', 'r', 'H', '5', 'O', 'm', 'f', 'V', 'p', 'w', 'y', ',', 'k', 'U', 'e', 'E', 'K', 'G', '4', '!', '.', '2', 't', 'n', 'T', ' ', 'Y', 'h', '8', 'a', 'd', '?', 'x', 'g', 'J', 'C', '0', '6', 'F', 'c', 'i', 'S', 'P', 'L', 'A', 'I', 'l', 'B', 'R', 'N', 's', 'v', '1', 'X']
 Key3 =       ['S', 'C', 'Q', 'x', 'H', 'G', 'e', 'a', 'y', '4', '9', 'p', 'l', '2', 'X', 'R', 'v', 'K', 'f', '3', 'F', 'c', 'U', 'q', 'o', 'V', 'T', '8', 'L', 'n', 'd', 'D', 'W', 'J', 'I', '1', 'N', 'Y', 'M', 'r', ',', ' ', 'O', 'm', '5', '?', 't', 'P', 'z', '7', 'B', 'k', 'i', 'E', 'g', '!', 'j', 'A', '0', 'w', 's', '.', 'Z', '6', 'u', 'h', 'b']
 
-while True:
-    print("------------")
-    print("1.Encrypt\n2.Decrypt\n")
-    choice = input("")
-    ec = list(input("Enter your message: "))
-    
+def Encrypt():
     A = 0
     B = 0
     C = 0
-    
+    while A < len(S1):
+        try:
+            charpos = Characters.index(str(S1[A]))
+            S1[A] = Key1[charpos]
+        except ValueError:
+            S1[A] = S1[A]
+        A += 1
+    while B < len(S2):
+        try:
+            charpos2 = Characters.index(str(S2[B]))
+            S2[B] = Key2[charpos2]
+        except ValueError:
+            S2[B] = S2[B]
+        B += 1
+    while C < len(S3):
+        try:
+            charpos3 = Characters.index(str(S3[C]))
+            S3[C] = Key3[charpos3]
+        except ValueError:
+            S3[C] = S3[C]
+        C += 1
+        
+def Decrypt():
+    A = 0
+    B = 0
+    C = 0
+    while A < len(S1):
+        try:
+            charpos = Key1.index(str(S1[A]))
+            S1[A] = Characters[charpos]
+        except ValueError:
+            S1[A] = S1[A]
+        A += 1
+    while B < len(S2):
+        try:
+            charpos2 = Key2.index(str(S2[B]))
+            S2[B] = Characters[charpos2]
+        except ValueError:
+            S2[B] = S2[B]
+        B += 1
+    while C < len(S3):
+        try:
+            charpos3 = Key3.index(str(S3[C]))
+            S3[C] = Characters[charpos3]
+        except ValueError:
+            S3[C] = S3[C]
+        C += 1
+
+def Sort():
+    global S1
+    global S2
+    global S3
     String_Length = len(ec)
     Section_Length = String_Length / 3
     Start = 0
@@ -29,57 +75,16 @@ while True:
     S3 = ec[Start : len(ec)]
     Start = Start + Section_Length
     Stop = Stop + Stop
-    
-    if choice == "1":
-        while A < len(S1):
-            try:
-                charpos = Characters.index(str(S1[A]))
-                S1[A] = Key1[charpos]
-                A += 1
-            except ValueError:
-                S1[A] = S1[A]
-                A += 1
-        while B < len(S2):
-            try:
-                charpos2 = Characters.index(str(S2[B]))
-                S2[B] = Key2[charpos2]
-                B += 1     
-            except ValueError:
-                S2[B] = S2[B]
-                B += 1
-        while C < len(S3):
-            try:
-                charpos3 = Characters.index(str(S3[C]))
-                S3[C] = Key3[charpos3]
-                C += 1
-            except ValueError:
-                S3[C] = S3[C]
-                C += 1
+    return S1, S2, S3
 
+while True:
+    print("------------")
+    print("1.Encrypt\n2.Decrypt\n")
+    choice = input("")
+    ec = list(input("Enter your message: "))
+    Sort()
+    if choice == "1":
+        Encrypt()
     if choice == "2":
-        while A < len(S1):
-            try:
-                charpos = Key1.index(str(S1[A]))
-                S1[A] = Characters[charpos]
-                A += 1
-            except ValueError:
-                S1[A] = S1[A]
-                A += 1
-        while B < len(S2):
-            try:
-                charpos2 = Key2.index(str(S2[B]))
-                S2[B] = Characters[charpos2]
-                B += 1
-            except ValueError:
-                S2[B] = S2[B]
-                B += 1
-        while C < len(S3):
-            try:
-                charpos3 = Key3.index(str(S3[C]))
-                S3[C] = Characters[charpos3]
-                C += 1
-            except ValueError:
-                S3[C] = S3[C]
-                C += 1
-                                
+        Decrypt()                   
     print(*S1, *S2, *S3, sep='')
