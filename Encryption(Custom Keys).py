@@ -2,12 +2,6 @@ import random
 import os.path
 
 Characters  = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "\n"]
-Characters1 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "\n"]
-Characters2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "\n"]
-Characters3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "\n"]
-Key1 = []
-Key2 = []
-Key3 = []
 
 def Sort():
     global S1
@@ -32,61 +26,55 @@ def Sort():
     return S1, S2, S3
 
 def Encrypt():
-    A = 0
-    B = 0
-    C = 0
-    while A < len(S1):
+    for i in range(len(S1)):
         try:
-            charpos = Characters.index(str(S1[A]))
-            S1[A] = Key1[charpos]
+            charpos = Characters.index(str(S1[i]))
+            S1[i] = Key1[charpos]
         except ValueError:
-            S1[A] = S1[A]
-        A += 1
-    while B < len(S2):
+            pass
+    for i in range(len(S2)):
         try:
-            charpos2 = Characters.index(str(S2[B]))
-            S2[B] = Key2[charpos2]
+            charpos2 = Characters.index(str(S2[i]))
+            S2[i] = Key2[charpos2]
         except ValueError:
-            S2[B] = S2[B]
-        B += 1
-    while C < len(S3):
+            pass
+    for i in range(len(S3)):
         try:
-            charpos3 = Characters.index(str(S3[C]))
-            S3[C] = Key3[charpos3]
+            charpos3 = Characters.index(str(S3[i]))
+            S3[i] = Key3[charpos3]
         except ValueError:
-            S3[C] = S3[C]
-        C += 1
+            pass
 
 def Decrypt():
-    A = 0
-    B = 0
-    C = 0
-    while A < len(S1):
+    for i in range(len(S1)):
         try:
-            charpos = Key1.index(str(S1[A]))
-            S1[A] = Characters[charpos]
+            charpos = Key1.index(str(S1[i]))
+            S1[i] = Characters[charpos]
         except ValueError:
-            S1[A] = S1[A]
-        A += 1
-    while B < len(S2):
+            pass
+    for i in range(len(S2)):
         try:
-            charpos2 = Key2.index(str(S2[B]))
-            S2[B] = Characters[charpos2]
+            charpos2 = Key2.index(str(S2[i]))
+            S2[i] = Characters[charpos2]
         except ValueError:
-            S2[B] = S2[B]
-        B += 1
-    while C < len(S3):
+            pass
+    for i in range(len(S3)):
         try:
-            charpos3 = Key3.index(str(S3[C]))
-            S3[C] = Characters[charpos3]
+            charpos3 = Key3.index(str(S3[i]))
+            S3[i] = Characters[charpos3]
         except ValueError:
-            S3[C] = S3[C]
-        C += 1
+            pass
 
 def GenKey():
     global Key1
     global Key2
     global Key3
+    Key1 = []
+    Key2 = []
+    Key3 = []
+    Characters1 = Characters[:-1]
+    Characters2 = Characters[:-1]
+    Characters3 = Characters[:-1]
     for i in range(len(Characters1)):
         Char = random.choice(Characters1)
         Characters1.remove(Char)
@@ -111,18 +99,20 @@ def GenKey():
     for element in Key3:
         f.write(element)
     f.close()
+    return Key1, Key2, Key3
+    
 
 def OpenKey():
     global Key1
     global Key2
     global Key3
-    if os.path.exists(Name + ".txt"):
-            f = open(Name + ".txt", "r")
+    if os.path.exists(Name):
+            f = open(Name, "r")
             Key1 =  f.readline()
             Key2 = f.readline()
             Key3 = f.readline()
             f.close()
-            return True
+            return Key1, Key2, Key3
     else:
         print("No key file found with that name. Please re-enter your key file name.")
         return False
@@ -140,22 +130,20 @@ def Save():
     f.close()
 
 while True:
-    Startup = input("Select an option:\n (1) Existing key\n (2) Generate key\n\n Option: ")
-    Name = input("\nEnter keyfile name (without extension): ")
+    Startup = input("Select an option:\n (1) Existing key\n (2) Generate key\n Option: ")
+    Name = input("\nEnter keyfile name(No extension): ")+ ".txt"
     if Name == "" or Name == " ":
             print("Keyfile names cannot be blank.")
     if Startup == "1":
-        if OpenKey() == True:
+        if OpenKey() != False:
             break
-    if Startup == "2":
+    else:
         GenKey()
         OpenKey()
         break
 
 while True:
-    choice = input("-------------------------------\nSelect a Method:\n (1) Encrypt\n (2) Decrypt\n (3) Back\n Method: ")
-    if choice == "3":
-        break
+    choice = input("-------------------------------\nSelect a Method:\n (1) Encrypt\n (2) Decrypt\nMethod: ")
     ec = list(input("-------------------------------\nEnter the message: "))
     Sort()
     if choice == "1":
