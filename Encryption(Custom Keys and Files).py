@@ -1,7 +1,7 @@
 import random
 import os.path
 
-Characters  = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "\n"]
+Characters  = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "[" , "]", "(", ")", "\n"]
 
 def Sort():
     global S1
@@ -30,19 +30,19 @@ def Encrypt():
         try:
             charpos = Characters.index(str(S1[i]))
             S1[i] = Key1[charpos]
-        except ValueError:
+        except:
             pass
     for i in range(len(S2)):
         try:
             charpos2 = Characters.index(str(S2[i]))
             S2[i] = Key2[charpos2]
-        except ValueError:
+        except:
             pass
     for i in range(len(S3)):
         try:
             charpos3 = Characters.index(str(S3[i]))
             S3[i] = Key3[charpos3]
-        except ValueError:
+        except:
             pass
 
 def Decrypt():
@@ -50,19 +50,19 @@ def Decrypt():
         try:
             charpos = Key1.index(str(S1[i]))
             S1[i] = Characters[charpos]
-        except ValueError:
+        except:
             pass
     for i in range(len(S2)):
         try:
             charpos2 = Key2.index(str(S2[i]))
             S2[i] = Characters[charpos2]
-        except ValueError:
+        except:
             pass
     for i in range(len(S3)):
         try:
             charpos3 = Key3.index(str(S3[i]))
             S3[i] = Characters[charpos3]
-        except ValueError:
+        except:
             pass
 
 def GenKey():
@@ -87,21 +87,20 @@ def GenKey():
         Char = random.choice(Characters3)
         Characters3.remove(Char)
         Key3.append(Char)
-    f = open(Name + ".txt", "w")
+    f = open(Name, "w")
     for element in Key1:
         f.write(element)
     f.write("\n")
-    f = open(Name + ".txt", "a")
+    f = open(Name, "a")
     for element in Key2:
         f.write(element)
     f.write("\n")
-    f = open(Name + ".txt", "a")
+    f = open(Name, "a")
     for element in Key3:
         f.write(element)
     f.close()
     return Key1, Key2, Key3
     
-
 def OpenKey():
     global Key1
     global Key2
