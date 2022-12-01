@@ -3,7 +3,7 @@ import os.path
 
 Characters  = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", ".", "!", "?", "[" , "]", "(", ")", "\n"]
 
-def Sort():
+def Sort(ec):
     global S1
     global S2
     global S3
@@ -25,7 +25,7 @@ def Sort():
     Stop = Stop + Stop
     return S1, S2, S3
 
-def Encrypt():
+def Encrypt(S1,S2,S3):
     for i in range(len(S1)):
         try:
             charpos = Characters.index(str(S1[i]))
@@ -45,7 +45,7 @@ def Encrypt():
         except:
             pass
 
-def Decrypt():
+def Decrypt(S1,S2,S3):
     for i in range(len(S1)):
         try:
             charpos = Key1.index(str(S1[i]))
@@ -65,7 +65,7 @@ def Decrypt():
         except:
             pass
 
-def GenKey():
+def GenKey(Name):
     global Key1
     global Key2
     global Key3
@@ -101,7 +101,7 @@ def GenKey():
     f.close()
     return Key1, Key2, Key3
     
-def OpenKey():
+def OpenKey(Name):
     global Key1
     global Key2
     global Key3
@@ -116,7 +116,7 @@ def OpenKey():
         print("No key file found with that name. Please re-enter your key file name.")
         return False
 
-def Save():
+def Save(Name):
     f = open(Name, "w")
     for element in S1:
         f.write(element)
@@ -134,46 +134,21 @@ while True:
     if Name == "" or Name == " ":
             print("Keyfile names cannot be blank.")
     if Startup == "1":
-        if OpenKey() != False:
+        if OpenKey(Name) != False:
             break
     else:
-        GenKey()
-        OpenKey()
+        GenKey(Name)
+        OpenKey(Name)
         break
 
 while True:
-    choice = input("-------------------------------\nSelect an Option:\n (1) Encrypt/Decrypt a message\n (2) Encrypt/Decrypt a text file\nOption: ")
+    choice = input("-------------------------------\nSelect a Method:\n (1) Encrypt\n (2) Decrypt\n (3) Back\nMethod: ")
+    if choice == "3":
+        break
+    ec = list(input("-------------------------------\nEnter the message: "))
+    Sort(ec)
     if choice == "1":
-        while True:
-            choice = input("-------------------------------\nSelect a Method:\n (1) Encrypt\n (2) Decrypt\n (3) Back\nMethod: ")
-            if choice == "3":
-                break
-            ec = list(input("-------------------------------\nEnter the message: "))
-            Sort()
-            if choice == "1":
-                Encrypt()
-            if choice == "2":
-                Decrypt()
-            print(*S1, *S2, *S3, sep='')
-
+        Encrypt(S1, S2, S3)
     if choice == "2":
-        while True:
-            Name = input("-------------------------------\nEnter the text file name(No extension): ")+".txt"
-            if os.path.exists(Name):
-                f = open(Name, "r")
-                ec = list(''.join(f.readlines()))
-                f.close()
-                choice = input("Select a method:\n 1.Encrypt\n 2.Decrypt\n 3.Back\nMethod: ")
-                if choice == "1":
-                    Sort()
-                    Encrypt()
-                    Save()
-                    print("\nMessage Encrypted as:\n", *S1, *S2, *S3, sep='')
-                if choice == "2":
-                    Sort()
-                    Decrypt()
-                    Save()
-                    print("\nMessage Decrypted as:\n", *S1, *S2, *S3, sep='')
-                break
-            else:
-                print("No text file found with that name.")
+        Decrypt(S1, S2, S3)
+    print(*S1, *S2, *S3, sep='')
