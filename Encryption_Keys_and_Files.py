@@ -158,7 +158,22 @@ while True:
 
     if choice == "2":
         while True:
-            Name = input("-------------------------------\nEnter the text file name(No extension): ")+".txt"
+            Name = input("-------------------------------\nWARNING: File paths must be given with '\\' NOT '/'\nEnter the text file name (with extension): ")
+            if ".txt" in Name:
+                TypeChange = 0
+                pass
+            else:
+                NameAlt = Name.split(".")
+                Type = NameAlt[-1]
+                NameAlt[1] = ".txt"
+                NameAlt = ''.join(NameAlt)
+                NameAlt = NameAlt.split("\\")
+                NameAlt = NameAlt[-1]
+                os.system(f"ren {Name} {NameAlt}")
+                Name = Name.split("\\")
+                Name[-1] = NameAlt
+                Name = '\\'.join(Name)
+                TypeChange = 1
             if os.path.exists(Name):
                 f = open(Name, "r")
                 ec = list(''.join(f.readlines()))
@@ -169,6 +184,16 @@ while True:
                     Encrypt(S1,S2,S3)
                 if choice == "2":
                     Decrypt(S1,S2,S3)
+                if TypeChange == 1:
+                    NameAlt = Name.split(".")
+                    NameAlt[1] = f".{Type}"
+                    NameAlt = ''.join(NameAlt)
+                    NameAlt = NameAlt.split("\\")
+                    NameAlt = NameAlt[-1]
+                    os.system(f"ren {Name} {NameAlt}")
+                    Name = Name.split("\\")
+                    Name[-1] = NameAlt
+                    Name = '\\'.join(Name)
                 Save(Name)
                 break
             else:
