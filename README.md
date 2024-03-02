@@ -1,4 +1,4 @@
-# Block Encryption
+# Serpent
 
 A block encryption program that splits the given text or text file into three blocks and uses a different key for each block. Keys are generated on demand using a pre-made character list, giving roughly 72^72 possible combinations.
 
